@@ -1,0 +1,18 @@
+BasedOnStyle: Google
+IndentWidth: 4
+TabWidth: 4
+IndentAccessModifiers: false
+AccessModifierOffset: -4
+ColumnLimit: 120
+Cpp11BracedListStyle: false
+AllowShortEnumsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: Inline
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortCaseLabelsOnASingleLine: false
+BreakBeforeBraces: Attach
+IncludeBlocks: Preserve
+AlignTrailingComments: false
+InsertBraces: true
+
+DerivePointerAlignment: false
+PointerAlignment: Left

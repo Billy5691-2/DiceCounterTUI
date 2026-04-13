@@ -1,0 +1,43 @@
+---
+# -*: disable all default checks to get explicit control
+Checks: "
+  -*,
+  bugprone-*,
+  -bugprone-easily-swappable-parameters,
+  cppcoreguidelines-macro-usage,
+  cppcoreguidelines-avoid-non-const-global-variables,
+  cppcoreguidelines-pro-type-cast-cstyle-cast,
+  cppcoreguidelines-pro-type-member-init,
+  cppcoreguidelines-virtual-class-destructor,
+  google-explicit-constructor,
+  misc-header-include-cycle,
+  misc-use-anonymous-namespace,
+  modernize-make-shared,
+  modernize-make-unique,
+  modernize-loop-convert,
+  modernize-use-emplace,
+  modernize-deprecated-headers,
+  performance-unnecessary-value-param,
+  performance-for-range-only,
+  readability-braces-around-statements,
+  readability-non-const-parameter,
+  readability-named-paramter,
+  readability-identifier-naming
+  "
+WarningsAsErrors: "*"
+CheckOptions:
+  readability-identifier-naming.ClassCase: "CamelCase"
+  readability-identifier-naming.ConstexprVariableCase: "CamelCase"
+  readability-identifier-naming.EnumConstantCase: "UPPER_CASE"
+  readability-identifier-naming.FunctionCase: "CamelCase"
+  readability-identifier-naming.GlobalConstantCase: "CamelCase"
+  readability-identifier-naming.LocalVariableCase: "camelBack"
+  readability-identifier-naming.MacroDefinitionCase: "UPPER_CASE"
+  readability-identifier-naming.MemberCase: "camelBack"
+  readability-identifier-naming.MemberPrefix: "m_"
+  readability-identifier-naming.MethodCase: "CamelCase"
+  readability-identifier-naming.NamespaceCase: "lower_case"
+  readability-identifier-naming.PublicMemberPrefix: ""
+
+  performance-unnecessary-value-param.AllowedTypes: "std::stop_token"
+HeaderFilterRegex: "src/.*"

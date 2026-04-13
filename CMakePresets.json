@@ -1,0 +1,47 @@
+{
+    "version": 6,
+    "configurePresets": [
+        {
+            "name": "base",
+            "hidden": true,
+            "generator": "Unix Makefiles"
+        },
+        {
+            "name": "debug",
+            "inherits": "base",
+            "displayName": "debug",
+            "description": "Debug build",
+            "binaryDir": "${sourceDir}/build/debug",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "release",
+            "inherits": "base",
+            "displayName": "release",
+            "description": "Release build",
+            "binaryDir": "${sourceDir}/build/release",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_COMPILE_WARNINGS_AS_ERROR": "ON"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "debug",
+            "configurePreset": "debug",
+            "displayName": "debug",
+            "description": "Debug build",
+            "jobs": 50
+        },
+        {
+            "name": "release",
+            "configurePreset": "release",
+            "displayName": "release",
+            "description": "Release build",
+            "jobs": 50
+        }
+    ]
+}
