@@ -3,10 +3,12 @@ find_package(Curses REQUIRED)
 
 set(HEADERS
     main_app.h
+    common/error_logger.h
 )
 
 set(SOURCES
     main_app.cpp
+    common/error_logger.cpp
     )
 
 add_library(${PROJECT_NAME}_lib SHARED ${SOURCES})

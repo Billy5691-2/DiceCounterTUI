@@ -1,2 +1,3 @@
 build/
 dice_counter
+**/LogFile.txt

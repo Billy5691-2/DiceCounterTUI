@@ -1,6 +1,8 @@
 #ifndef MAIN_APP_H
 #define MAIN_APP_H
 
+#include "common/error_logger.h"
+
 #include <memory>
 #include <thread>
 
@@ -9,7 +11,7 @@ namespace app {
 class MainApp {
 public:
     static std::unique_ptr<MainApp> Create();
-    static bool InitialiseNCurses();
+    static bool InitialiseNCurses(std::shared_ptr<common::ErrorLogger>& logger);
     bool DidAllWindowsStart();
     void Start();
 
@@ -23,7 +25,8 @@ public:
 
 private:
     std::jthread m_inputThread;
-    MainApp();
+    std::shared_ptr<common::ErrorLogger> m_logger;
+    explicit MainApp(std::shared_ptr<common::ErrorLogger>& logger);
 
     void InputThreadLoop(std::stop_token stopToken);
 };
