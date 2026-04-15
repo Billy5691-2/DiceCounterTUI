@@ -28,7 +28,9 @@ int main() {
         return EXIT_FAILURE;
     }
 
-    mainApp->Start();
+    if (!mainApp->Start()) {
+        return EXIT_FAILURE;
+    }
 
     shutdownRequested.wait(false);
 

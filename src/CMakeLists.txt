@@ -4,11 +4,19 @@ find_package(Curses REQUIRED)
 set(HEADERS
     main_app.h
     common/error_logger.h
+    data/constants.h
+    data/data_handler.h
+    display/window_constants.h
+    display/window.h
+    display/input_window.h
 )
 
 set(SOURCES
     main_app.cpp
     common/error_logger.cpp
+    data/data_handler.cpp
+    display/window.cpp
+    display/input_window.cpp
     )
 
 add_library(${PROJECT_NAME}_lib SHARED ${SOURCES})
