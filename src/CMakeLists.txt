@@ -9,6 +9,7 @@ set(HEADERS
     display/window_constants.h
     display/window.h
     display/input_window.h
+    display/data_window.h
 )
 
 set(SOURCES
@@ -17,6 +18,7 @@ set(SOURCES
     data/data_handler.cpp
     display/window.cpp
     display/input_window.cpp
+    display/data_window.cpp
     )
 
 add_library(${PROJECT_NAME}_lib SHARED ${SOURCES})

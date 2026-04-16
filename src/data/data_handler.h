@@ -30,13 +30,13 @@ public:
 
 private:
     int m_currentInput = 0;
-    // std::array<int, NumValues> m_valueTally;
-    // std::array<double, NumValues> m_valueProbabilities;
+    std::array<int, NumValues> m_valueTally = {};
+    std::array<double, NumValues> m_valueProbabilities = {};
     std::vector<int> m_previousInputs;
 
     bool ValidateInput();
-    // void CalculateProbabilities();
-    // void UpdateTally();
+    void CalculateProbabilities();
+    void UpdateTally();
 };
 
 }  // namespace data

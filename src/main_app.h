@@ -3,6 +3,7 @@
 
 #include "common/error_logger.h"
 #include "data/data_handler.h"
+#include "display/data_window.h"
 #include "display/input_window.h"
 
 #include <memory>
@@ -29,6 +30,7 @@ private:
     std::jthread m_inputThread;
     std::shared_ptr<common::ErrorLogger> m_logger;
     std::unique_ptr<data::DataHandler> m_dataHandler;
+    std::unique_ptr<display::DataWindow> m_dataWindow;
     std::unique_ptr<display::InputWindow> m_inputWindow;
 
     explicit MainApp(std::shared_ptr<common::ErrorLogger>& logger);

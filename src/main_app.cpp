@@ -54,9 +54,17 @@ bool MainApp::InitialiseNCurses(std::shared_ptr<common::ErrorLogger>& logger) {
 
 MainApp::MainApp(std::shared_ptr<common::ErrorLogger>& logger) : m_logger(logger) {
     m_dataHandler = std::make_unique<data::DataHandler>();
-    display::WindowDimension inputWindowDimensions = {
-        .width = COLS, .height = display::InputWindowHeight + display::InputWindowHeight, .topEdge = 1, .leftEdge = 0
-    };
+
+    display::WindowDimension dataWindowDimensions = { .width = display::DataWindowWidth + display::BorderSpaces,
+                                                      .height = display::DataWindowHeight + display::InputWindowHeight,
+                                                      .topEdge = 1,
+                                                      .leftEdge = 0 };
+    m_dataWindow = display::DataWindow::Create(dataWindowDimensions, logger);
+    display::WindowDimension inputWindowDimensions = { .width = COLS,
+                                                       .height =
+                                                           display::InputWindowHeight + display::InputWindowHeight,
+                                                       .topEdge = 1 + dataWindowDimensions.height,
+                                                       .leftEdge = 0 };
     m_inputWindow = display::InputWindow::Create(inputWindowDimensions, logger);
 }
 
@@ -65,7 +73,9 @@ MainApp::~MainApp() {
     if (m_inputThread.joinable()) {
         m_inputThread.join();
     }
+    // Destroy windows before calling endwin();
     m_inputWindow = nullptr;
+    m_dataWindow = nullptr;
     endwin();
 }
 
@@ -85,6 +95,7 @@ std::unique_ptr<MainApp> MainApp::Create() {
 
 bool MainApp::DidAllWindowsStart() {
     bool success = (m_inputWindow != nullptr);
+    success &= (m_dataWindow != nullptr);
     return success;
 }
 
@@ -103,7 +114,6 @@ void MainApp::InputThreadLoop(std::stop_token stopToken) {
         input = getch();
         if (input != ERR && input != KEY_F(1)) {
             if (input >= '0' && input <= '9') {
-                m_logger->LogError("Okay: Input detected\n");
                 m_dataHandler->AccumulateInput(input);
                 healthy &= RefreshInputWindow();
             } else if (input == '\n' || input == KEY_ENTER) {
@@ -127,6 +137,7 @@ bool MainApp::RefreshInputWindow() {
 
 bool MainApp::RefreshAllWindows() {
     bool healthy = RefreshInputWindow();
+    healthy &= m_dataWindow->DrawData(m_dataHandler->GetProbabilities(), m_dataHandler->GetTally());
     return healthy;
 }
 
