@@ -37,9 +37,11 @@ bool MainApp::InitialiseNCurses(std::shared_ptr<common::ErrorLogger>& logger) {
         logger->LogError("Fatal: start_color() returned ERR\n");
         return false;
     }
-    if (nodelay(terminalWin, TRUE) == ERR) {
-        logger->LogError("Fatal: nodelay() returned ERR\n");
-        return false;
+    if (init_pair(display::RedBlackId, COLOR_BLACK, COLOR_RED)) {
+        if (nodelay(terminalWin, TRUE) == ERR) {
+            logger->LogError("Fatal: nodelay() returned ERR\n");
+            return false;
+        }
     }
     if (printw("Welcome to the Dice Counter TUI. Press F1 to exit\n") == ERR) {
         logger->LogError("Fatal: printw() returned ERR\n");
@@ -56,13 +58,17 @@ MainApp::MainApp(std::shared_ptr<common::ErrorLogger>& logger) : m_logger(logger
     m_dataHandler = std::make_unique<data::DataHandler>();
 
     display::WindowDimension dataWindowDimensions = { .width = display::DataWindowWidth + display::BorderSpaces,
-                                                      .height = display::DataWindowHeight + display::InputWindowHeight,
+                                                      .height = display::DataWindowHeight + display::BorderSpaces,
                                                       .topEdge = 1,
                                                       .leftEdge = 0 };
     m_dataWindow = display::DataWindow::Create(dataWindowDimensions, logger);
+    display::WindowDimension histogramWindowDimensions = { .width = COLS - dataWindowDimensions.width - 1,
+                                                           .height = display::DataWindowHeight + display::BorderSpaces,
+                                                           .topEdge = 1,
+                                                           .leftEdge = dataWindowDimensions.width + 1 };
+    m_histogramWindow = display::HistogramWindow::Create(histogramWindowDimensions, logger);
     display::WindowDimension inputWindowDimensions = { .width = COLS,
-                                                       .height =
-                                                           display::InputWindowHeight + display::InputWindowHeight,
+                                                       .height = display::InputWindowHeight + display::BorderSpaces,
                                                        .topEdge = 1 + dataWindowDimensions.height,
                                                        .leftEdge = 0 };
     m_inputWindow = display::InputWindow::Create(inputWindowDimensions, logger);
@@ -76,6 +82,7 @@ MainApp::~MainApp() {
     // Destroy windows before calling endwin();
     m_inputWindow = nullptr;
     m_dataWindow = nullptr;
+    m_histogramWindow = nullptr;
     endwin();
 }
 
@@ -96,6 +103,7 @@ std::unique_ptr<MainApp> MainApp::Create() {
 bool MainApp::DidAllWindowsStart() {
     bool success = (m_inputWindow != nullptr);
     success &= (m_dataWindow != nullptr);
+    success &= (m_histogramWindow != nullptr);
     return success;
 }
 
@@ -138,6 +146,7 @@ bool MainApp::RefreshInputWindow() {
 bool MainApp::RefreshAllWindows() {
     bool healthy = RefreshInputWindow();
     healthy &= m_dataWindow->DrawData(m_dataHandler->GetProbabilities(), m_dataHandler->GetTally());
+    healthy &= m_histogramWindow->DrawHistogram(m_dataHandler->GetTally());
     return healthy;
 }
 

@@ -10,6 +10,7 @@ set(HEADERS
     display/window.h
     display/input_window.h
     display/data_window.h
+    display/histogram_window.h
 )
 
 set(SOURCES
@@ -19,6 +20,7 @@ set(SOURCES
     display/window.cpp
     display/input_window.cpp
     display/data_window.cpp
+    display/histogram_window.cpp
     )
 
 add_library(${PROJECT_NAME}_lib SHARED ${SOURCES})
