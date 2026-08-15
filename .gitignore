@@ -1,6 +1,7 @@
 # Build artifacts
 build/
 dice_counter
+compile_commands.json
 
 # App outputs
 **/LogFile.txt

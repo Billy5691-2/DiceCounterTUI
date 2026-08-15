@@ -21,10 +21,12 @@ if [[ $DEBUG_MODE = true ]]; then
     cmake --preset debug
     cmake --build build/debug --preset debug --target dice_counter --parallel
     cp build/debug/dice_counter .
+    cp build/debug/compile_commands.json .
 else
     echo Building app - Release
     mkdir -p build/release
     cmake --preset release
     cmake --build build/release --preset release --target dice_counter --parallel
     cp build/release/dice_counter .
+    cp build/release/compile_commands.json .
 fi
