@@ -6,7 +6,6 @@
 
 #include <array>
 #include <memory>
-#include <optional>
 #include <vector>
 
 namespace data {

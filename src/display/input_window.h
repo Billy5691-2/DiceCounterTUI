@@ -1,7 +1,6 @@
 #ifndef TUI_INPUT_WINDOW_H
 #define TUI_INPUT_WINDOW_H
 
-#include "data/constants.h"
 #include "display/window.h"
 
 #include <memory>

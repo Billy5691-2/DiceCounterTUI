@@ -2,7 +2,6 @@
 #define COMMON_ERROR_LOGGER_H
 
 #include <fstream>
-#include <memory>
 #include <string>
 
 namespace common {

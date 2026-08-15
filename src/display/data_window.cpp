@@ -50,7 +50,7 @@ bool DataWindow::DrawData(const std::array<double, data::NumValues>& probabiliti
     healthy &= PrintDashLine();
     for (int index = 0; index < data::NumValues; ++index) {
         healthy &= PrintDataLine((index * DataRowSpaces) + FirstDataRow, (index + data::MinInputValue),
-                                 probabilities[index], data::ExpectedProbabilites[index], tally[index]);
+                                 probabilities[index], data::ExpectedProbabilities[index], tally[index]);
     }
     healthy &= RefreshWindow();
     return healthy;

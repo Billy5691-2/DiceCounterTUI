@@ -1,5 +1,4 @@
 #include "display/input_window.h"
-#include "display/window_constants.h"
 
 #include <memory>
 #include <sstream>

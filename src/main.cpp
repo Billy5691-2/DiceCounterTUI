@@ -9,7 +9,7 @@
 std::atomic_flag shutdownRequested;
 
 /**
- * @brief Signal handler to shutdown the app if we recieve SIGINT, SIGTERM, SIGABRT
+ * @brief Signal handler to shutdown the app if we receive SIGINT, SIGTERM, SIGABRT
  * @param signal Either SIGINT, SIGTERM, or SIGABRT - unused
  */
 void SignalHandler(int /*signal*/) {
