@@ -1,3 +1,6 @@
 build/
 dice_counter
 **/LogFile.txt
+
+# Clangd
+.cache
