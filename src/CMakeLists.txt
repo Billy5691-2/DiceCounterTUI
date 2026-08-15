@@ -8,7 +8,7 @@ set(HEADERS
     data/data_handler.h
     display/window_constants.h
     display/window.h
-    display/input_window.h
+    display/dice_value_input_window.h
     display/data_window.h
     display/histogram_window.h
 )
@@ -18,7 +18,7 @@ set(SOURCES
     common/error_logger.cpp
     data/data_handler.cpp
     display/window.cpp
-    display/input_window.cpp
+    display/dice_value_input_window.cpp
     display/data_window.cpp
     display/histogram_window.cpp
     )

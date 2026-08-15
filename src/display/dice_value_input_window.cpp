@@ -1,4 +1,4 @@
-#include "display/input_window.h"
+#include "display/dice_value_input_window.h"
 
 #include <memory>
 #include <sstream>
@@ -9,20 +9,22 @@ namespace display {
 constexpr int PrevInputsRow = 1;
 constexpr int UserInputRow = 2;
 
-std::unique_ptr<InputWindow> InputWindow::Create(const WindowDimension& dimensions,
-                                                 const std::shared_ptr<common::ErrorLogger>& logger) {
-    std::unique_ptr<InputWindow> windowPtr = std::unique_ptr<InputWindow>(new InputWindow(dimensions, logger));
+std::unique_ptr<DiceValueInputWindow> DiceValueInputWindow::Create(const WindowDimension& dimensions,
+                                                                   const std::shared_ptr<common::ErrorLogger>& logger) {
+    std::unique_ptr<DiceValueInputWindow> windowPtr =
+        std::unique_ptr<DiceValueInputWindow>(new DiceValueInputWindow(dimensions, logger));
     if (windowPtr->IsNullPointer()) {
-        logger->LogError("Warning: Failed to initialise InputWindow window pointer\n");
+        logger->LogError("Warning: Failed to initialise DiceValueInputWindow window pointer\n");
         return nullptr;
     }
     return windowPtr;
 }
 
-InputWindow::InputWindow(const WindowDimension& dimensions, const std::shared_ptr<common::ErrorLogger>& logger)
+DiceValueInputWindow::DiceValueInputWindow(const WindowDimension& dimensions,
+                                           const std::shared_ptr<common::ErrorLogger>& logger)
     : Window(dimensions, logger) {}
 
-bool InputWindow::DrawData(const std::vector<int>& prevInputs, const int currentValue) {
+bool DiceValueInputWindow::DrawData(const std::vector<int>& prevInputs, const int currentValue) {
     bool healthy = ClearWindow();
     healthy &= DrawPrevInputs(prevInputs);
     healthy &= DrawCurrentInput(currentValue);
@@ -30,7 +32,7 @@ bool InputWindow::DrawData(const std::vector<int>& prevInputs, const int current
     return healthy;
 }
 
-bool InputWindow::DrawPrevInputs(const std::vector<int>& prevInputs) {
+bool DiceValueInputWindow::DrawPrevInputs(const std::vector<int>& prevInputs) {
     int err = wmove(m_windowPtr, PrevInputsRow, 1);
     std::stringstream vectorToString;
     for (int prevInput : prevInputs) {
@@ -44,7 +46,7 @@ bool InputWindow::DrawPrevInputs(const std::vector<int>& prevInputs) {
     return true;
 }
 
-bool InputWindow::DrawCurrentInput(const int currentValue) {
+bool DiceValueInputWindow::DrawCurrentInput(const int currentValue) {
     int err = mvwprintw(m_windowPtr, UserInputRow, 1, "Please input a value: ");
     if (currentValue != 0) {
         err |= wprintw(m_windowPtr, "%d", currentValue);

@@ -71,7 +71,7 @@ MainApp::MainApp(std::shared_ptr<common::ErrorLogger>& logger) : m_logger(logger
                                                        .height = display::InputWindowHeight + display::BorderSpaces,
                                                        .topEdge = 1 + dataWindowDimensions.height,
                                                        .leftEdge = 0 };
-    m_inputWindow = display::InputWindow::Create(inputWindowDimensions, logger);
+    m_inputWindow = display::DiceValueInputWindow::Create(inputWindowDimensions, logger);
 }
 
 MainApp::~MainApp() {

@@ -4,8 +4,8 @@
 #include "common/error_logger.h"
 #include "data/data_handler.h"
 #include "display/data_window.h"
+#include "display/dice_value_input_window.h"
 #include "display/histogram_window.h"
-#include "display/input_window.h"
 
 #include <memory>
 #include <thread>
@@ -33,7 +33,7 @@ private:
     std::unique_ptr<data::DataHandler> m_dataHandler;
     std::unique_ptr<display::DataWindow> m_dataWindow;
     std::unique_ptr<display::HistogramWindow> m_histogramWindow;
-    std::unique_ptr<display::InputWindow> m_inputWindow;
+    std::unique_ptr<display::DiceValueInputWindow> m_inputWindow;
 
     explicit MainApp(std::shared_ptr<common::ErrorLogger>& logger);
 
