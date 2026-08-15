@@ -2,8 +2,12 @@
 #define DATA_CONSTANTS_H
 
 #include <array>
+#include <string>
 
 namespace data {
+
+const std::string OutputFileDirectory = "games/";
+const std::string InfiniteFileName = OutputFileDirectory + "Infinite_File.csv";
 
 constexpr int MinInputValue = 2;
 constexpr int MaxInputValue = 12;

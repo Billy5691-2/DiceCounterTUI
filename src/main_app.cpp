@@ -55,7 +55,7 @@ bool MainApp::InitialiseNCurses(std::shared_ptr<common::ErrorLogger>& logger) {
 }
 
 MainApp::MainApp(std::shared_ptr<common::ErrorLogger>& logger) : m_logger(logger) {
-    m_dataHandler = std::make_unique<data::DataHandler>();
+    m_dataHandler = std::make_unique<data::DataHandler>(m_logger);
 
     display::WindowDimension dataWindowDimensions = { .width = display::DataWindowWidth + display::BorderSpaces,
                                                       .height = display::DataWindowHeight + display::BorderSpaces,

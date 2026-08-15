@@ -1,6 +1,10 @@
+# Build artifacts
 build/
 dice_counter
+
+# App outputs
 **/LogFile.txt
+**/*.csv
 
 # Clangd
 .cache

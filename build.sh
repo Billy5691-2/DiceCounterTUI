@@ -13,6 +13,7 @@ while getopts :"d" option; do
 done
 
 mkdir -p build
+mkdir -p games
 
 if [[ $DEBUG_MODE = true ]]; then
     echo Building app - Debug
